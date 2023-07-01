@@ -2,6 +2,8 @@
 import { program } from "commander";
 import { getUtf, deUtf } from "./stable/utf.js";
 import { httpGet, httpPost } from "./dev/http.js";
+import { hitoGet } from "./stable/whito.js";
+import { getIPAdress } from "./dev/ip.js";
 import { updater } from "./dev/auto-update.js";
 import chalk from "chalk";
 const version = '0.2.2';
@@ -10,6 +12,7 @@ program.version(version, "-v,--version");
 
 const error = chalk.bold.red;
 const update = chalk.bold.blue;
+const ip = chalk.bold.blueBright;
 
 program
   .command("utf <string>")
@@ -47,6 +50,20 @@ program
   .action(() => {
     console.clear()
     console.log(update('已清空终端'))
+  });
+
+program
+  .command("whito")
+  .description("来条whito")
+  .action(() => {
+    hitoGet()
+  });
+
+program
+  .command("ip")
+  .description("获取本机内网ip")
+  .action(() => {
+    console.log(ip(getIPAdress()))
   });
 
 program

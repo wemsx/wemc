@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "chalk": "^5.2.0",
-    "commander": "^10.0.1"
+    "commander": "^10.0.1",
+    "whito": "^1.0.3"
   }
 }
