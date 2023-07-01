@@ -2,11 +2,11 @@
 import { program } from "commander";
 import { getUtf, deUtf } from "./stable/utf.js";
 import { httpGet, httpPost } from "./dev/http.js";
-import { hitoGet } from "./stable/whito.js";
+import { hitoGet, hitoOfficialGet } from "./stable/whito.js";
 import { getIPAdress } from "./dev/ip.js";
 import { updater } from "./dev/auto-update.js";
 import chalk from "chalk";
-const version = '0.3.1';
+const version = '0.4.0';
 
 program.version(version, "-v,--version");
 
@@ -30,18 +30,18 @@ program
   .command("post <url>")
   .description("向url发送post请求")
   .option("-d --data <data>", "data")
-  .option("-d --headers [headers]", "headers")
-  .action(async (url) => {
-    let data = await httpPost(url, this.opts().data, this.opts().headers);
-    console.log(data);
+  .option("-h --headers [headers]", "headers")
+  .action(async (url, dataToPost, headers) => {
+    let dataAfterPost = await httpPost(url, dataToPost, headers);
+    console.log(dataAfterPost);
   });
 
 program
   .command("get <url>")
   .description("发起一个get请求")
   .action(async (url) => {
-    let data = await httpGet(url);
-    console.log(data);
+    let dataHere = await httpGet(url);
+    console.log(dataHere);
   });
 
 program
@@ -55,8 +55,16 @@ program
 program
   .command("whito")
   .description("来条whito")
+  .option("-c --cdn [cdn]", "CDN",'gcore')
+  .option("-t --type [type]", "句子种类",'c')
+  .action((cdn, type) => {
+    hitoGet(cdn, type)
+  });
+program
+  .command("hito")
+  .description("来条hito")
   .action(() => {
-    hitoGet()
+    hitoOfficialGet()
   });
 
 program
@@ -72,4 +80,5 @@ program
   .action(() => {
     updater(version,(res)=>console.log(update(res)));
   });
+
 program.parse(process.argv);
