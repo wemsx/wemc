@@ -6,7 +6,7 @@ import { hitoGet, hitoOfficialGet } from "./stable/whito.js";
 import { getIPAdress } from "./dev/ip.js";
 import { updater } from "./dev/auto-update.js";
 import chalk from "chalk";
-const version = '0.4.0';
+const version = '0.4.1';
 
 program.version(version, "-v,--version");
 
