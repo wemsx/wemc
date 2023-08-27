@@ -7,7 +7,11 @@
     "wemc": "./index.js"
   },
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "release:once": "standard-version --first-release",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch"
   },
   "type": "module",
   "author": "wemsx",
